@@ -34,7 +34,8 @@ function saveToHistory(restaurant) {
     name: restaurant.name,
     date: formattedDate,
     time: formattedTime,
-    googleMapsLink: restaurant.googleMapsLink
+    googleMapsLink: restaurant.googleMapsLink,
+    favorite: false // Add favorite property, initialized as false
   };
   
   // Get existing history from storage or initialize empty array
@@ -56,6 +57,24 @@ function saveToHistory(restaurant) {
   });
 }
 
+// Function to toggle favorite status of a restaurant in history
+function toggleFavorite(index) {
+  chrome.storage.sync.get(['restaurantHistory'], (result) => {
+    let history = result.restaurantHistory || [];
+    
+    if (history[index]) {
+      // Toggle the favorite status
+      history[index].favorite = !history[index].favorite;
+      
+      // Save updated history back to storage
+      chrome.storage.sync.set({ restaurantHistory: history }, () => {
+        // Reload the history to show the updated favorite status
+        loadHistory();
+      });
+    }
+  });
+}
+
 async function fetchRestaurants() {
     try {
       // 🔄 Show Loading GIF and Hide the Wheel
@@ -74,6 +93,8 @@ async function fetchRestaurants() {
         if (!data.results || data.results.length === 0) {
           console.error("❌ No restaurants found!");
           alert("No restaurants found! Try adjusting your settings.");
+          document.getElementById("loading-gif").style.display = "none";
+          document.getElementById("wheel").style.display = "block";
           return;
         }
   
@@ -201,7 +222,7 @@ function loadHistory() {
     }
     
     // Create and append history items
-    history.forEach(entry => {
+    history.forEach((entry, index) => {
       const historyItem = document.createElement("div");
       historyItem.className = "history-item";
       
@@ -219,14 +240,32 @@ function loadHistory() {
       restaurantInfo.appendChild(restaurantName);
       restaurantInfo.appendChild(restaurantDate);
       
+      // Create favorite star button
+      const favoriteBtn = document.createElement("button");
+      favoriteBtn.className = "favorite-btn";
+      favoriteBtn.innerHTML = entry.favorite ? 
+        '<img src="assets/star-filled.png" alt="Favorite">' : 
+        '<img src="assets/star-empty.png" alt="Not Favorite">';
+      
+      favoriteBtn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent any default action
+        toggleFavorite(index);
+      });
+      
+      const actionsContainer = document.createElement("div");
+      actionsContainer.className = "actions-container";
+      
       const restaurantLink = document.createElement("a");
       restaurantLink.className = "restaurant-link";
       restaurantLink.href = entry.googleMapsLink;
       restaurantLink.target = "_blank";
       restaurantLink.textContent = "View on Map";
       
+      actionsContainer.appendChild(favoriteBtn);
+      actionsContainer.appendChild(restaurantLink);
+      
       historyItem.appendChild(restaurantInfo);
-      historyItem.appendChild(restaurantLink);
+      historyItem.appendChild(actionsContainer);
       
       historyList.appendChild(historyItem);
     });
@@ -256,6 +295,23 @@ function clearHistory() {
           button: false,
           timer: 1500,
         });
+      });
+    }
+  });
+}
+
+// Function to star the current restaurant selection
+function starCurrentRestaurant(restaurantName) {
+  chrome.storage.sync.get(['restaurantHistory'], (result) => {
+    let history = result.restaurantHistory || [];
+    
+    // Find the restaurant in history (should be the first one, just added)
+    if (history.length > 0 && history[0].name === restaurantName) {
+      history[0].favorite = true;
+      
+      // Save updated history back to storage
+      chrome.storage.sync.set({ restaurantHistory: history }, () => {
+        console.log("✅ Restaurant marked as favorite:", restaurantName);
       });
     }
   });

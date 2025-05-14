@@ -13,18 +13,18 @@ html, body {
     /* box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); */
     overflow: hidden;
     margin: 0;
-  }  
+}  
 
-  canvas {
+canvas {
     border-radius: 50%;
     border: 10px solid #fff;
     width: 310px; /* Layout width */
     height: 310px; /* Layout height */
     display: block; 
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-  }
-  
-  button {
+}
+
+button {
     font-family: 'Poppins', sans-serif;
     margin-top: 26px;
     margin-left: 60px;
@@ -35,265 +35,320 @@ html, body {
     border-radius: 10px;
     cursor: pointer;
     width: 60%;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
+}
 
+button:hover {
+    background-color: #0056b3;
+}
 
 #spin {
     font-weight: bold;
-  }
-  
+}
+
 /* Style for the Settings Button */
 #open-settings {
-  background: none; /* No default button background */
-  border: none; /* Remove default border */
-  margin: 10px; /* Add margin to separate it from other elements */
-  cursor: pointer; /* Change cursor to pointer */
-  padding: 0; /* No padding for the image */
-  position: absolute; /* Allow precise positioning */
-  top: 10px; /* Distance from the top of the container */
-  right: 10px; /* Distance from the right edge of the container */
-  width: 30px;
+    background: none; /* No default button background */
+    border: none; /* Remove default border */
+    margin: 10px; /* Add margin to separate it from other elements */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 0; /* No padding for the image */
+    position: absolute; /* Allow precise positioning */
+    top: 10px; /* Distance from the top of the container */
+    right: 10px; /* Distance from the right edge of the container */
+    width: 30px;
 }
 
 #open-settings img {
-  width: 20px; /* Adjust size to fit design */
-  height: 20px; /* Adjust size to fit design */
-  transition: transform 0.2s ease; /* Smooth hover animation */
+    width: 20px; /* Adjust size to fit design */
+    height: 20px; /* Adjust size to fit design */
+    transition: transform 0.2s ease; /* Smooth hover animation */
 }
 
 #open-settings img:hover {
-  transform: scale(1.1); /* Slightly enlarge on hover for interactivity */
+    transform: scale(1.1); /* Slightly enlarge on hover for interactivity */
 }
 
 /* General Styling for Settings View */
 #settings-view {
-  display: none;
-  background-color: #ffffff;
-  /* border-radius: 15px; */
-  padding: 20px;
-  text-align: center;
-  width: 90%; /* Make the settings view wider */
-  margin: auto; /* Center the box */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow-y: auto; /* Add scroll if content exceeds the view */
+    display: none;
+    background-color: #ffffff;
+    /* border-radius: 15px; */
+    padding: 20px;
+    text-align: center;
+    width: 90%; /* Make the settings view wider */
+    margin: auto; /* Center the box */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto; /* Add scroll if content exceeds the view */
 }
 
 /* Label Styling */
 #settings-view label {
-  display: block;
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 10px 0 5px;
-  color: #000;
+    display: block;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 10px 0 5px;
+    color: #000;
 }
 
 /* Input and Select Styling */
 #settings-view input[type="text"],
 #settings-view input[type="number"],
 #settings-view select {
-  width: 70%; /* Adjust width to match the new container size */
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  color: #555;
+    width: 70%; /* Adjust width to match the new container size */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #555;
 }
 
 /* Button Styling */
 #settings-view button {
-  width: 45%; /* Make buttons slightly larger */
-  padding: 12px;
-  margin: 10px 2.5%; /* Space buttons evenly */
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007BFF;
-  
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 45%; /* Make buttons slightly larger */
+    padding: 12px;
+    margin: 10px 2.5%; /* Space buttons evenly */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #settings-view button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /* Align inputs and buttons */
 #settings-view .form-group {
-  margin-bottom: 10px;
-  text-align: center;
-  width: 100%; /* Match the new container width */
-  margin: 0 auto 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%; /* Match the new container width */
+    margin: 0 auto 20px;
 }
 
-background-color:rgb(61, 69, 119);
-  
 /* 🎡 Ensure `wheel-container` is positioned relative */
 #wheel-container {
-  position: relative;  /* ✅ This makes the GIF position relative to the wheel */
-  text-align: center;
-  width: 100%; /* ✅ Prevents overflow */
-  height: 310px; /* ✅ Matches wheel size */
-  overflow: hidden; /* ✅ Ensures GIF doesn't overflow */
+    position: relative;  /* ✅ This makes the GIF position relative to the wheel */
+    text-align: center;
+    width: 100%; /* ✅ Prevents overflow */
+    height: 310px; /* ✅ Matches wheel size */
+    overflow: hidden; /* ✅ Ensures GIF doesn't overflow */
 }
 
 /* 🔄 Loading GIF: Centered Inside the Wheel */
 #loading-gif {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 310px;  /* ✅ Adjust size */
-  height: 310px;
-  max-width: 500px;  /* ✅ Prevents it from getting too large */
-  max-height: 500px;
-  transform: translate(-50%, -50%);  /* ✅ Centers it */
-  z-index: 3;  /* ✅ Ensures it's above the wheel */
-  display: none; /* ✅ Hide initially */
-  pointer-events: none; /* ✅ Prevent interaction */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 310px;  /* ✅ Adjust size */
+    height: 310px;
+    max-width: 500px;  /* ✅ Prevents it from getting too large */
+    max-height: 500px;
+    transform: translate(-50%, -50%);  /* ✅ Centers it */
+    z-index: 3;  /* ✅ Ensures it's above the wheel */
+    display: none; /* ✅ Hide initially */
+    pointer-events: none; /* ✅ Prevent interaction */
 }
 
 .swal-modal {
-  width: 300px !important; /* Set desired width */
-  height: 320px !important; /* Adjust height dynamically */
-  font-size: 16px !important; /* Adjust font size */
-  padding: 10px !important; /* Adjust padding */
+    width: 300px !important; /* Set desired width */
+    height: 320px !important; /* Adjust height dynamically */
+    font-size: 16px !important; /* Adjust font size */
+    padding: 10px !important; /* Adjust padding */
 }
 
 .swal-text {
-  font-size: 12px !important; /* Customize the message text size */
+    font-size: 12px !important; /* Customize the message text size */
 }
 
 .swal-title {
-  font-size: 18px !important; /* Customize the title text size */
+    font-size: 18px !important; /* Customize the title text size */
 }
 
 /* Button Group for Settings and History */
 .button-group {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  gap: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 /* History Button Styles */
 #open-history {
-  background: none;
-  border: none;
-  margin: 0;
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
+    background: none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    right: 40px; /* Position it to the left of settings button */
 }
 
 #open-history img {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.2s ease;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
 }
 
 #open-history img:hover {
-  transform: scale(1.1);
-}
-
-/* Update Settings Button to Match */
-#open-settings {
-  position: static; /* Override the absolute positioning */
-  margin: 0;
+    transform: scale(1.1);
 }
 
 /* History View Styling */
 #history-view {
-  display: none;
-  background-color: #ffffff;
-  padding: 20px;
-  text-align: center;
-  width: 90%;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow-y: auto;
-  max-height: 80%;
+    display: none;
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    max-height: 80%;
 }
 
-#history-view h3 {
-  color: #333;
-  margin-bottom: 20px;
+#history-view h2 {
+    color: #333;
+    margin-bottom: 20px;
 }
 
 #history-list {
-  text-align: left;
-  max-height: 300px;
-  overflow-y: auto;
-  margin-bottom: 20px;
-  padding: 0 10px;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 .history-item {
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .history-item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .restaurant-info {
-  flex: 1;
+    flex: 1;
 }
 
 .restaurant-name {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 .restaurant-date {
-  font-size: 0.8rem;
-  color: #888;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.actions-container {
+    display: flex;
+    align-items: center;
 }
 
 .restaurant-link {
-  margin-left: 10px;
-  color: #007BFF;
-  text-decoration: none;
-  font-size: 0.8rem;
+    margin-left: 10px;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 0.8rem;
 }
 
 .restaurant-link:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.favorite-btn img {
+    width: 20px;
+    height: 20px;
 }
 
 .empty-history {
-  text-align: center;
-  color: #888;
-  padding: 20px 0;
+    text-align: center;
+    color: #888;
+    padding: 20px 0;
 }
 
 /* History View Buttons */
 #history-view button {
-  width: 45%;
-  margin: 10px 2.5%;
+    width: 45%;
+    margin: 10px 2.5%;
 }
 
 #clear-history {
-  background-color: #dc3545;
+    background-color: #dc3545;
 }
 
 #clear-history:hover {
-  background-color: #c82333;
+    background-color: #c82333;
+}
+
+/* Caption box styling */
+#caption-box {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#greeting {
+    font-size: 1.6rem;
+    color: #333;
+    margin: 0;
+}
+
+/* Styling for the star restaurant button in the swal modal */
+.star-restaurant-btn {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.star-restaurant-btn:hover {
+    border-color: #FDCC0D;
+    background-color: rgba(253, 204, 13, 0.1);
+}
+
+/* Add animation for the star button */
+@keyframes star-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.favorite-btn img.starred {
+    animation: star-pulse 0.4s ease-in-out;
 }

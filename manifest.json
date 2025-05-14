@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Lunch Lotto",
-    "version": "1.0",
+    "version": "1.1",
     "description": "A fun lunch recommendation tool with healthy options!",
     "permissions": ["notifications", "storage", "alarms", "geolocation"],
     "host_permissions": ["https://maps.googleapis.com/*"],
