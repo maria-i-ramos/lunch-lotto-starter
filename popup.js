@@ -167,6 +167,46 @@ function hideSettings() {
   document.getElementById("settings-view").style.display = "none";
 }
 
+function toggleStarRestaurant(restaurant) {
+  chrome.storage.sync.get(['starredRestaurants'], (result) => {
+    let starred = result.starredRestaurants || [];
+
+    const exists = starred.find((r) => r.name === restaurant.name);
+
+    if (exists) {
+      // Remove from favorites
+      starred = starred.filter((r) => r.name !== restaurant.name);
+      swal({
+        title: "Removed from Favorites",
+        icon: "info",
+        button: false,
+        timer: 1000,
+      });
+    } else {
+      // Add to favorites
+      starred.unshift({
+        name: restaurant.name,
+        googleMapsLink: restaurant.googleMapsLink,
+        date: new Date().toLocaleDateString(),
+      });
+
+      // Limit starred list to 20 items
+      if (starred.length > 20) {
+        starred = starred.slice(0, 20);
+      }
+
+      swal({
+        title: "Starred ⭐",
+        icon: "success",
+        button: false,
+        timer: 1000,
+      });
+    }
+
+    chrome.storage.sync.set({ starredRestaurants: starred });
+  });
+}
+
 // 🛠️ Toggle History View
 function showHistory() {
   document.getElementById("main-view").style.display = "none";
