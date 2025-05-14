@@ -28,9 +28,13 @@
         <p id="selected-restaurant"></p>
         <a id="google-maps-link" href="#" target="_blank" style="display: none;">View on Google Maps</a>
       </div>
-      <!-- <button id="open-settings">Settings</button> -->
+      <!-- Settings Button -->
       <button id="open-settings">
         <img src="assets/filter.jpg" alt="Settings">
+      </button>
+      <!-- History Button -->
+      <button id="open-history">
+        <img src="assets/history.png" alt="History">
       </button>
     </div>
 
@@ -50,6 +54,16 @@
       </div>
       <button id="save-settings">Save</button>
       <button id="close-settings">Back</button>
+    </div>
+    
+    <!-- History View -->
+    <div id="history-view" class="view">
+      <h2>Restaurant History</h2>
+      <div id="history-list">
+        <!-- History items will be populated here -->
+      </div>
+      <button id="clear-history">Clear History</button>
+      <button id="close-history">Back</button>
     </div>
   </div>
 

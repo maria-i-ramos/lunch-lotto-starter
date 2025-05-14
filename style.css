@@ -175,3 +175,125 @@ background-color:rgb(61, 69, 119);
 .swal-title {
   font-size: 18px !important; /* Customize the title text size */
 }
+
+/* Button Group for Settings and History */
+.button-group {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* History Button Styles */
+#open-history {
+  background: none;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+}
+
+#open-history img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+#open-history img:hover {
+  transform: scale(1.1);
+}
+
+/* Update Settings Button to Match */
+#open-settings {
+  position: static; /* Override the absolute positioning */
+  margin: 0;
+}
+
+/* History View Styling */
+#history-view {
+  display: none;
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+  max-height: 80%;
+}
+
+#history-view h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#history-list {
+  text-align: left;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.history-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.restaurant-info {
+  flex: 1;
+}
+
+.restaurant-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.restaurant-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.restaurant-link {
+  margin-left: 10px;
+  color: #007BFF;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.restaurant-link:hover {
+  text-decoration: underline;
+}
+
+.empty-history {
+  text-align: center;
+  color: #888;
+  padding: 20px 0;
+}
+
+/* History View Buttons */
+#history-view button {
+  width: 45%;
+  margin: 10px 2.5%;
+}
+
+#clear-history {
+  background-color: #dc3545;
+}
+
+#clear-history:hover {
+  background-color: #c82333;
+}
