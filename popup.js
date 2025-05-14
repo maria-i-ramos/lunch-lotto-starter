@@ -93,8 +93,6 @@ async function fetchRestaurants() {
         if (!data.results || data.results.length === 0) {
           console.error("❌ No restaurants found!");
           alert("No restaurants found! Try adjusting your settings.");
-          document.getElementById("loading-gif").style.display = "none";
-          document.getElementById("wheel").style.display = "block";
           return;
         }
   

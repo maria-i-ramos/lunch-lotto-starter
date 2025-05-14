@@ -341,14 +341,3 @@ button:hover {
     border-color: #FDCC0D;
     background-color: rgba(253, 204, 13, 0.1);
 }
-
-/* Add animation for the star button */
-@keyframes star-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-.favorite-btn img.starred {
-    animation: star-pulse 0.4s ease-in-out;
-}
