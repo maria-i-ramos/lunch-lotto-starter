@@ -28,7 +28,7 @@ function scaleCanvas(canvas, ctx) {
     // Restore the original canvas dimensions for CSS styling
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-  }
+}
   
 function isColorDark(color) {
     // Convert hex color to RGB
@@ -40,20 +40,20 @@ function isColorDark(color) {
     // Calculate brightness using the luminance formula
     const brightness = (0.299 * r + 0.587 * g + 0.114 * b);
     return brightness < 128; // Return true if the color is dark
-  }  
+}  
 
 function truncateOption(option) {
     if (!option) {
         return "Loading..."; // Provide a fallback for empty options
-      }
+    }
 
     if (option.length > 13) {
       return option.slice(0, 10) + "..."; // Keep the first 12 characters and add "..."
     }
     return option; // Return the original string if it's 15 characters or less
-  }  
+}  
   
-  function drawWheel() {
+function drawWheel() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before redrawing
   
     // Set the font size and style
@@ -95,9 +95,9 @@ function truncateOption(option) {
     // Draw the pointer and center circle
     drawPointer();
     drawCenterCircle();
-  }  
+}  
 
-  function drawCenterCircle() {
+function drawCenterCircle() {
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
   
@@ -119,9 +119,9 @@ function truncateOption(option) {
     ctx.lineWidth = 5; // Border width
     ctx.strokeStyle = "#fff"; // Border color
     ctx.stroke();
-  }
+}
 
-  function drawPointer() {
+function drawPointer() {
     const centerX = canvas.width / 2; // Center of the canvas
   
     // Set shadow properties for the pointer
@@ -147,9 +147,9 @@ function truncateOption(option) {
     ctx.strokeStyle = "#ffffff"; // Border color
     ctx.stroke();
     ctx.restore(); // Restore the context state to remove shadow effects for subsequent drawings
-  }  
+}  
   
-  function rotateWheel() {
+function rotateWheel() {
     spinTime += 30;
     if (spinTime >= spinTimeTotal) {
       clearTimeout(spinTimeout);
@@ -173,6 +173,9 @@ function truncateOption(option) {
   
       // Select a random motivational message
       const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+      // Save the selected restaurant to history
+      saveToHistory(selectedOption);
   
       // Show result + motivational message
       swal({
@@ -206,7 +209,7 @@ function truncateOption(option) {
     startAngle += (spinAngleStart * Math.PI) / 180;
     drawWheel();
     spinTimeout = setTimeout(rotateWheel, 30);
-  }
+}
 
 function finalizeWheel() {
   const degrees = (startAngle * 180) / Math.PI + 90; // Convert radians to degrees
