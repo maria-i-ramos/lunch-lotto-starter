@@ -167,46 +167,6 @@ function hideSettings() {
   document.getElementById("settings-view").style.display = "none";
 }
 
-function toggleStarRestaurant(restaurant) {
-  chrome.storage.sync.get(['starredRestaurants'], (result) => {
-    let starred = result.starredRestaurants || [];
-
-    const exists = starred.find((r) => r.name === restaurant.name);
-
-    if (exists) {
-      // Remove from favorites
-      starred = starred.filter((r) => r.name !== restaurant.name);
-      swal({
-        title: "Removed from Favorites",
-        icon: "info",
-        button: false,
-        timer: 1000,
-      });
-    } else {
-      // Add to favorites
-      starred.unshift({
-        name: restaurant.name,
-        googleMapsLink: restaurant.googleMapsLink,
-        date: new Date().toLocaleDateString(),
-      });
-
-      // Limit starred list to 20 items
-      if (starred.length > 20) {
-        starred = starred.slice(0, 20);
-      }
-
-      swal({
-        title: "Starred ⭐",
-        icon: "success",
-        button: false,
-        timer: 1000,
-      });
-    }
-
-    chrome.storage.sync.set({ starredRestaurants: starred });
-  });
-}
-
 // 🛠️ Toggle History View
 function showHistory() {
   document.getElementById("main-view").style.display = "none";
@@ -224,50 +184,69 @@ function hideHistory() {
 // Load restaurant history from storage and display it
 function loadHistory() {
   const historyList = document.getElementById("history-list");
-  
-  chrome.storage.sync.get(['restaurantHistory'], (result) => {
+
+  chrome.storage.sync.get(['restaurantHistory', 'starredRestaurants'], (result) => {
     const history = result.restaurantHistory || [];
-    
-    // Clear the history list first
+    const starred = result.starredRestaurants || [];
+
     historyList.innerHTML = '';
-    
+
     if (history.length === 0) {
-      // Show empty history message
       const emptyMsg = document.createElement("div");
       emptyMsg.className = "empty-history";
       emptyMsg.textContent = "No restaurant history yet. Spin the wheel to get started!";
       historyList.appendChild(emptyMsg);
       return;
     }
-    
-    // Create and append history items
+
     history.forEach(entry => {
       const historyItem = document.createElement("div");
       historyItem.className = "history-item";
-      
+
       const restaurantInfo = document.createElement("div");
       restaurantInfo.className = "restaurant-info";
-      
+
       const restaurantName = document.createElement("div");
       restaurantName.className = "restaurant-name";
       restaurantName.textContent = entry.name;
-      
+
       const restaurantDate = document.createElement("div");
       restaurantDate.className = "restaurant-date";
       restaurantDate.textContent = `${entry.date} at ${entry.time}`;
-      
+
       restaurantInfo.appendChild(restaurantName);
       restaurantInfo.appendChild(restaurantDate);
-      
+
+      const rightSideControls = document.createElement("div");
+      rightSideControls.style.display = "flex";
+      rightSideControls.style.alignItems = "center";
+      rightSideControls.style.gap = "10px";
+
       const restaurantLink = document.createElement("a");
       restaurantLink.className = "restaurant-link";
       restaurantLink.href = entry.googleMapsLink;
       restaurantLink.target = "_blank";
-      restaurantLink.textContent = "View on Map";
-      
+      restaurantLink.textContent = "Map";
+
+      // Star Button
+      const starButton = document.createElement("button");
+      starButton.className = "star-restaurant-btn";
+      const isStarred = starred.some(r => r.name === entry.name);
+      starButton.innerHTML = isStarred ? "⭐" : "☆";
+      starButton.title = isStarred ? "Unstar" : "Star";
+
+      starButton.addEventListener("click", () => {
+        toggleStarRestaurant(entry);
+        // Reload view after toggling
+        loadHistory();
+      });
+
+      rightSideControls.appendChild(restaurantLink);
+      rightSideControls.appendChild(starButton);
+
       historyItem.appendChild(restaurantInfo);
-      historyItem.appendChild(restaurantLink);
-      
+      historyItem.appendChild(rightSideControls);
+
       historyList.appendChild(historyItem);
     });
   });
