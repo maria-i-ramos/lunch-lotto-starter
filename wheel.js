@@ -177,15 +177,13 @@ function rotateWheel() {
       // Save the selected restaurant to history
       saveToHistory(selectedOption);
   
-      // Show result + motivational message with star option
+      // Show result + motivational message
       swal({
         title: `Selected Option: ${selectedOption.name}`,
         content: (() => {
           const content = document.createElement("div");
           const paragraph = document.createElement("p");
           const link = document.createElement("a");
-          const starContainer = document.createElement("div");
-          const starButton = document.createElement("button");
           
           paragraph.style.fontSize = "12px";
           paragraph.textContent = randomMessage; // Add the motivational message
@@ -193,50 +191,16 @@ function rotateWheel() {
           link.href = selectedOption.googleMapsLink; // Set the Google Maps link
           link.target = "_blank"; // Open the link in a new tab
           link.textContent = "View on Google Maps"; // Text for the link
-          link.style.color = "#1a73e8"; // Change link color
+          link.style.color = "#a2a2a2"; // Optional: Add a color to the link
           link.style.fontSize = "10px";
-          link.style.display = "block";
-          link.style.marginBottom = "15px";
-          
-          // Create star button
-          starContainer.style.marginTop = "15px";
-          starContainer.style.textAlign = "center";
-          
-          starButton.className = "star-restaurant-btn";
-          starButton.innerHTML = '<img src="assets/star-empty.png" width="20" height="20" alt="Star"> Mark as favorite';
-          starButton.style.background = "none";
-          starButton.style.border = "1px solid #ccc";
-          starButton.style.borderRadius = "15px";
-          starButton.style.padding = "5px 10px";
-          starButton.style.fontSize = "11px";
-          starButton.style.cursor = "pointer";
-          starButton.style.display = "inline-flex";
-          starButton.style.alignItems = "center";
-          starButton.style.gap = "5px";
-          
-          // Add click handler to star button
-          starButton.onclick = () => {
-            // Call function to star the current restaurant
-            starCurrentRestaurant(selectedOption.name);
-            
-            // Update button appearance
-            starButton.innerHTML = '<img src="assets/star-filled.png" width="20" height="20" alt="Starred"> Marked as favorite';
-            starButton.style.border = "1px solid #FDCC0D";
-            starButton.disabled = true;
-            
-            return false; // Prevent event bubbling
-          };
-          
-          starContainer.appendChild(starButton);
       
           content.appendChild(paragraph);
           content.appendChild(link);
-          content.appendChild(starContainer);
       
           return content;
         })(),
         icon: "success",
-        button: "Close", // Add a close button
+        button: false, // Hide the default OK button
       });
       
       return;
